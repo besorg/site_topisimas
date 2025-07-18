@@ -97,12 +97,12 @@ import Layout from '../layouts/Layout.astro';
 
         const whatsappButton = document.getElementById('whatsapp-button');
         if (whatsappButton && whatsapp) {
-          whatsappButton.href = `https://wa.me/${whatsapp}?text=${encodeURIComponent("¡Hola! Estoy interesada en realizar un tratamiento capilar.")}`;
+          whatsappButton.href = `https://wa.me/${whatsapp}?text=${encodeURIComponent("¡Hola! Quiero agendar un turno.")}`;
         }
 
         const whatsappLink = document.getElementById('wa-link');
         if (whatsappLink && whatsapp) {
-          whatsappLink.href = `https://wa.me/${whatsapp}?text=${encodeURIComponent("¡Hola! Estoy interesada en agendar un turno.")}`;
+          whatsappLink.href = `https://wa.me/${whatsapp}?text=${encodeURIComponent("¡Hola! Quiero agendar un turno.")}`;
         }
 
         const products = menuRows
@@ -122,7 +122,7 @@ list.innerHTML = products.map((product) => `
       <h3>${product.nombre}</h3>
       <p>${product.descripcion}</p>
     </div>
-    <a class="btn" href="https://wa.me/5491165565637?text=${encodeURIComponent('¡Hola! Me interesa el tratamiento: ' + product.nombre)}" target="_blank">Reservar</a>
+    <a class="btn" href="https://wa.me/5491165565637?text=${encodeURIComponent('¡Hola! Quisiera ' + product.nombre)}" target="_blank">Reservar</a>
   </div>
 `).join('');
 
