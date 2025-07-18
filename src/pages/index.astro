@@ -156,13 +156,11 @@ list.innerHTML = products.map((product) => `
   </div>
 `).join('');
 
+        // Reseñas
         const reviews = reviewsRows
-  .filter(r => r.cita)
-  .map(r => `
-    <div class="review-card">
-      <img src="${r.cita}" alt="Reseña" />
-    </div>
-  `);
+          .filter(r => r.cita && r.autor)
+          .map(r => `<div class="review"><p>“${r.cita.trim()}”</p><span>- ${r.autor.trim()}</span></div>`);
+
         document.getElementById('reviews-container').innerHTML = reviews.join('');
       }).catch(err => {
         console.error("Error cargando los datos:", err);
