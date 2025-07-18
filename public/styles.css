@@ -1,21 +1,5 @@
 A/* === Variables de Tema === */
 :root {
-  --bg-color: #fce4ec;
-  --text-color: #333333;
-  --accent-color: #ec407a;
-  --card-bg: #f8bbd0;
-  --border-color: #e0e0e0;
-
-  --header-bg: #fce4ec;
-  --header-text: #333333;
-  --modal-bg: #ffffff;
-  --modal-text: #1a1a1a;
-  --footer-bg: #ec407a;
-  --footer-text: #ffffff;
-}
-
-
-.dark {
   --bg-color: #2c2c2c;
   --text-color: #fce4ec;
   --accent-color: #f06292;
@@ -28,6 +12,22 @@ A/* === Variables de Tema === */
   --modal-text: #fce4ec;
   --footer-bg: #1a1a1a;
   --footer-text: #fce4ec;
+}
+
+
+.dark {
+  --bg-color: #fce4ec;
+  --text-color: #333333;
+  --accent-color: #ec407a;
+  --card-bg: #f8bbd0;
+  --border-color: #e0e0e0;
+
+  --header-bg: #fce4ec;
+  --header-text: #333333;
+  --modal-bg: #ffffff;
+  --modal-text: #1a1a1a;
+  --footer-bg: #ec407a;
+  --footer-text: #ffffff;
 }
 
 
