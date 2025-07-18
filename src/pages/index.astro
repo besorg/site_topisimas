@@ -1,0 +1,172 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Topísima - Estética Capilar">
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-column">
+        <img src="/images/logo.png" alt="Logo Topísima" class="hero-logo" />
+      </div>
+      <div class="hero-column">
+        <h1>Tratamientos capilares que realzan tu belleza</h1>
+        <p>Viernes de 15 a 20hs<br />Sábados de 8 a 20hs<br />Domingos de 8 a 13hs</p>
+        <a id="whatsapp-button" class="btn hero-btn" target="_blank">Reservá tu turno</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu" id="menu">
+    <h2>Tratamientos</h2>
+    <p class="menu-subtitle">¡Agendá tu turno hoy y sentite radiante con un estilo perfecto!</p>
+    <div class="burger-list two-columns" id="burger-list"></div>
+  </section>
+
+  <section class="about" id="about">
+    <h2>Sobre Nosotros</h2>
+    <p>Somos Topísima, un espacio dedicado a la belleza y salud capilar. Ofrecemos tratamientos personalizados como botox capilar, alisado y shock de keratina, pensados para realzar tu estilo y cuidar tu cabello con productos de alta calidad y atención profesional.</p>
+  </section>
+
+  <section class="reviews" id="reviews">
+    <h2>Lo que dicen nuestros clientes</h2>
+    <div id="reviews-container" class="review-grid"></div>
+  </section>
+
+  <section class="cta-reserva cta-section">
+    <h3 class="cta-message">¡Agendá tu turno hoy y sentite radiante con un estilo perfecto!</h3>
+    <a class="btn" href="https://wa.me/5491165565637?text=¡Hola! Quiero agendar un turno para un tratamiento capilar." target="_blank">Agendar por WhatsApp</a>
+  </section>
+
+  <!--
+  <div id="burger-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <img id="modal-img" src="" alt="Tratamiento capilar" />
+      <h3 id="modal-title"></h3>
+      <p id="modal-description"></p>
+
+      <form id="order-form" onsubmit="sendOrder(event)">
+        <label for="quantity">Cantidad:</label>
+        <input type="number" id="quantity" name="quantity" min="1" value="1" required />
+
+        <div class="price-line">
+          <label><strong>Precio por unidad:</strong> <span id="unit-price">$0</span></label>
+          <label><strong>Total:</strong> <span id="order-total">$0</span></label>
+        </div>
+
+        <label for="address">Dirección de entrega:</label>
+        <input type="text" id="address" name="address" required />
+
+        <label for="comment">Comentario adicional:</label>
+        <textarea id="comment" name="comment"></textarea>
+
+        <input type="hidden" id="product-name" name="product-name" />
+        <button type="submit">Reservar turno por WhatsApp</button>
+      </form>
+    </div>
+  </div>
+  -->
+
+  <section class="contact" id="contact">
+    <h2>Contacto</h2>
+    <p>Contactanos por nuestras redes sociales o reservá tu turno directamente.</p>
+    <div class="contact-methods">
+      <a href="https://instagram.com/Topiisiimas" target="_blank">
+        <img src="/images/instagram-icon.png" alt="Instagram" class="icon" />
+      </a>
+      <a id="wa-link" href="#" target="_blank">
+        <img src="/images/whatsapp-icon.png" alt="WhatsApp" class="icon" />
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; Topisimas Todos los derechos reservados.</p>
+    <p>
+      Sitio desarrollado por <a href="https://marketing-bso.netlify.app/" target="_blank" style="color: inherit; text-decoration: underline;">BSO Web Studio</a>
+    </p>
+  </footer>
+
+  <script>
+    document.documentElement.classList.add('dark');
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" defer></script>
+  <script src="/scripts/modal.js" defer></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const baseId = '1LTrH4UlGmY94Q_hH5jxTjy-CwDTUoS8YBGrvytSILvM';
+
+      const urls = {
+        menu: `https://docs.google.com/spreadsheets/d/${baseId}/gviz/tq?tqx=out:csv&sheet=Productos`,
+        reviews: `https://docs.google.com/spreadsheets/d/${baseId}/gviz/tq?tqx=out:csv&sheet=Resenias`
+      };
+
+      function fetchCSV(url) {
+        return fetch(url)
+          .then(res => res.text())
+          .then(csv => {
+            const parsed = Papa.parse(csv, { header: false }).data;
+            const headers = parsed[0].map(h => h.trim().toLowerCase());
+            return parsed.slice(1).map(row => {
+              const obj = {};
+              headers.forEach((key, i) => {
+                obj[key] = row[i]?.trim?.() ?? '';
+              });
+              return obj;
+            });
+          });
+      }
+
+      Promise.all([
+        fetchCSV(urls.menu),
+        fetchCSV(urls.reviews)
+      ]).then(([menuRows, reviewsRows]) => {
+        const whatsapp = '5491165565637';
+        window.dynamicWhatsapp = whatsapp;
+
+        const whatsappButton = document.getElementById('whatsapp-button');
+        if (whatsappButton && whatsapp) {
+          whatsappButton.href = `https://wa.me/${whatsapp}?text=${encodeURIComponent("¡Hola! Estoy interesada en realizar un tratamiento capilar.")}`;
+        }
+
+        const whatsappLink = document.getElementById('wa-link');
+        if (whatsappLink && whatsapp) {
+          whatsappLink.href = `https://wa.me/${whatsapp}?text=${encodeURIComponent("¡Hola! Estoy interesada en realizar un tratamiento capilar.")}`;
+        }
+
+        const products = menuRows
+          .filter(row => row.nombre && row.imagen)
+          .map(row => ({
+            nombre: row.nombre,
+            descripcion: row.descripcion,
+            imagen: row.imagen
+          }));
+        window.dynamicProducts = products;
+
+const list = document.getElementById('burger-list');
+list.innerHTML = products.map((product) => `
+  <div class="burger-card">
+    <img src="${product.imagen}" alt="${product.nombre}" />
+    <div class="card-content">
+      <h3>${product.nombre}</h3>
+      <p>${product.descripcion}</p>
+    </div>
+    <a class="btn" href="https://wa.me/5491165565637?text=${encodeURIComponent('¡Hola! Me interesa el tratamiento: ' + product.nombre)}" target="_blank">Reservar</a>
+  </div>
+`).join('');
+
+        const reviews = reviewsRows
+  .filter(r => r.cita)
+  .map(r => `
+    <div class="review-card">
+      <img src="${r.cita}" alt="Reseña" />
+    </div>
+  `);
+        document.getElementById('reviews-container').innerHTML = reviews.join('');
+      }).catch(err => {
+        console.error("Error cargando los datos:", err);
+      });
+    });
+  </script>
+</Layout>
