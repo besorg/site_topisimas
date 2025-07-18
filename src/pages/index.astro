@@ -24,7 +24,7 @@ import Layout from '../layouts/Layout.astro';
 
   <section class="about" id="about">
     <h2>Sobre Nosotros</h2>
-    <p>Somos Topísima, un espacio dedicado a la belleza y salud capilar. Ofrecemos tratamientos personalizados como botox capilar, alisado y shock de keratina, pensados para realzar tu estilo y cuidar tu cabello con productos de alta calidad y atención profesional.</p>
+    <p>Somos Topísimas, un espacio dedicado a la belleza y salud capilar. Ofrecemos tratamientos personalizados como corte, coloración, botox capilar, alisado y shock de keratina, pensados para realzar tu estilo y cuidar tu cabello con productos de alta calidad y atención profesional.</p>
   </section>
 
   <section class="reviews" id="reviews">
@@ -34,38 +34,8 @@ import Layout from '../layouts/Layout.astro';
 
   <section class="cta-reserva cta-section">
     <h3 class="cta-message">¡Agendá tu turno hoy y sentite radiante con un estilo perfecto!</h3>
-    <a class="btn" href="https://wa.me/5491165565637?text=¡Hola! Quiero agendar un turno para un tratamiento capilar." target="_blank">Agendar por WhatsApp</a>
+    <a class="btn" href="https://wa.me/5491165565637?text=¡Hola! Quiero agendar un turno." target="_blank">Agendar por WhatsApp</a>
   </section>
-
-  <!--
-  <div id="burger-modal" class="modal hidden">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <img id="modal-img" src="" alt="Tratamiento capilar" />
-      <h3 id="modal-title"></h3>
-      <p id="modal-description"></p>
-
-      <form id="order-form" onsubmit="sendOrder(event)">
-        <label for="quantity">Cantidad:</label>
-        <input type="number" id="quantity" name="quantity" min="1" value="1" required />
-
-        <div class="price-line">
-          <label><strong>Precio por unidad:</strong> <span id="unit-price">$0</span></label>
-          <label><strong>Total:</strong> <span id="order-total">$0</span></label>
-        </div>
-
-        <label for="address">Dirección de entrega:</label>
-        <input type="text" id="address" name="address" required />
-
-        <label for="comment">Comentario adicional:</label>
-        <textarea id="comment" name="comment"></textarea>
-
-        <input type="hidden" id="product-name" name="product-name" />
-        <button type="submit">Reservar turno por WhatsApp</button>
-      </form>
-    </div>
-  </div>
-  -->
 
   <section class="contact" id="contact">
     <h2>Contacto</h2>
@@ -132,7 +102,7 @@ import Layout from '../layouts/Layout.astro';
 
         const whatsappLink = document.getElementById('wa-link');
         if (whatsappLink && whatsapp) {
-          whatsappLink.href = `https://wa.me/${whatsapp}?text=${encodeURIComponent("¡Hola! Estoy interesada en realizar un tratamiento capilar.")}`;
+          whatsappLink.href = `https://wa.me/${whatsapp}?text=${encodeURIComponent("¡Hola! Estoy interesada en agendar un turno.")}`;
         }
 
         const products = menuRows
